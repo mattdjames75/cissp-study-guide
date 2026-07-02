@@ -1,0 +1,146 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>CISSP 2024 Interactive Study Guide</title>
+    <link rel="stylesheet" href="styles.css">
+  </head>
+  <body>
+    <header class="app-header">
+      <nav class="topbar" aria-label="Primary">
+        <div class="brand">
+          <span class="brand-mark" aria-hidden="true">C</span>
+          <div>
+            <strong>CISSP 2024</strong>
+            <span>Interactive Study Guide</span>
+          </div>
+        </div>
+        <div class="header-actions">
+          <label class="search-wrap">
+            <span class="sr-only">Search topics</span>
+            <input id="searchInput" type="search" placeholder="Search topics, controls, models...">
+          </label>
+          <button id="resetProgress" class="ghost-button" type="button">Reset</button>
+        </div>
+      </nav>
+      <section class="hero">
+        <div class="hero-copy">
+          <p class="eyebrow">Built from the supplied ISC2 CISSP24 Study Guide</p>
+          <h1>Study by domain, visualize the patterns, test recall.</h1>
+          <p>
+            This site compresses the guide into an exam-centered workspace:
+            domain summaries, key concepts, diagrams, flashcards, and quick checks.
+          </p>
+        </div>
+        <div class="hero-graphic" aria-label="CISSP domain wheel">
+          <canvas id="domainWheel" width="520" height="520"></canvas>
+          <div class="wheel-center">
+            <strong id="overallProgress">0%</strong>
+            <span>complete</span>
+          </div>
+        </div>
+      </section>
+    </header>
+
+    <main>
+      <section class="dashboard" aria-label="Study dashboard">
+        <div class="metric">
+          <span>Exam Domains</span>
+          <strong>8</strong>
+        </div>
+        <div class="metric">
+          <span>Highest Weight</span>
+          <strong>Domain 1</strong>
+        </div>
+        <div class="metric">
+          <span>Study Mode</span>
+          <strong id="activeModeLabel">Overview</strong>
+        </div>
+        <div class="metric">
+          <span>Marked Complete</span>
+          <strong id="completedCount">0/8</strong>
+        </div>
+      </section>
+
+      <section class="workspace">
+        <aside class="domain-rail" aria-label="Domain navigation">
+          <div class="rail-title">Domains</div>
+          <div id="domainNav" class="domain-nav"></div>
+        </aside>
+
+        <section class="study-panel" aria-live="polite">
+          <div class="panel-toolbar">
+            <div class="segmented" role="tablist" aria-label="Study modes">
+              <button class="mode-button is-active" type="button" data-mode="overview">Overview</button>
+              <button class="mode-button" type="button" data-mode="visuals">Visuals</button>
+              <button class="mode-button" type="button" data-mode="cards">Flashcards</button>
+              <button class="mode-button" type="button" data-mode="quiz">Quiz</button>
+            </div>
+            <button id="completeDomain" class="primary-button" type="button">Mark Complete</button>
+          </div>
+
+          <article id="domainView"></article>
+        </section>
+      </section>
+    </main>
+
+    <template id="overviewTemplate">
+      <section class="domain-hero">
+        <div>
+          <p class="domain-kicker"></p>
+          <h2></h2>
+          <p class="domain-summary"></p>
+        </div>
+        <div class="weight-card">
+          <span>Exam Weight</span>
+          <strong></strong>
+        </div>
+      </section>
+      <div class="content-grid">
+        <section>
+          <h3>Core Objectives</h3>
+          <div class="objective-list"></div>
+        </section>
+        <section>
+          <h3>What To Recognize</h3>
+          <div class="recognition-list"></div>
+        </section>
+      </div>
+      <section>
+        <h3>Topic Map</h3>
+        <div class="topic-map"></div>
+      </section>
+    </template>
+
+    <template id="visualTemplate">
+      <section class="visual-stage"></section>
+      <section class="concept-strip"></section>
+    </template>
+
+    <template id="cardsTemplate">
+      <section class="flashcard-area">
+        <div class="flashcard" tabindex="0" role="button" aria-label="Flip flashcard">
+          <div class="flash-front"></div>
+          <div class="flash-back"></div>
+        </div>
+        <div class="card-actions">
+          <button id="prevCard" class="ghost-button" type="button">Previous</button>
+          <span id="cardCounter"></span>
+          <button id="nextCard" class="primary-button" type="button">Next</button>
+        </div>
+      </section>
+    </template>
+
+    <template id="quizTemplate">
+      <section class="quiz-area">
+        <div class="quiz-question"></div>
+        <div class="quiz-options"></div>
+        <div class="quiz-feedback" aria-live="polite"></div>
+        <button id="nextQuestion" class="primary-button" type="button">Next Question</button>
+      </section>
+    </template>
+
+    <script src="app.js"></script>
+  </body>
+</html>
